@@ -4,17 +4,17 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  theme: {
+    extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        meow: ["Meow", "cursive"],
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),
-    function ({ addUtilities }) {
-      const newUtilities = {
-        ".text-stroke": {
-          "text-shadow":
-            "0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000",
-        },
-      };
-      addUtilities(newUtilities, ["responsive", "hover"]);
-    },
   ],
+  base: "/valentine-web/",
 });
