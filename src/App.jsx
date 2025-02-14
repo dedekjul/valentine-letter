@@ -5,12 +5,6 @@ import { FaHeart } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 const LetterSection1 = () => (
-<<<<<<< Updated upstream
-  <div className="p-4">
-    <p className="text-lg font-serif text-gray-800">
-      Dear crush, you are so beautiful
-    </p>
-=======
   <div className="flex flex-col items-center text-center">
     <p className="px-2 text-red-600 italic text-lg text-center font-meow bg-pink-100">
       Happy Valentine&apos;s Day
@@ -24,24 +18,10 @@ const LetterSection1 = () => (
     <p className="px-2 mt-1 text-sm font-poppins text-center text-gray-700 bg-pink-100">
       love it&lt;3
     </p>
->>>>>>> Stashed changes
   </div>
 );
 
 const LetterSection2 = () => (
-<<<<<<< Updated upstream
-  <div className="p-4">
-    <p className="text-lg font-serif text-gray-800">
-      That every time I see you
-    </p>
-    <p className="mt-2 text-sm text-gray-600 italic">
-      My heart skips a beat ❤️
-    </p>
-  </div>
-);
-
-const letterComponents = [LetterSection1, LetterSection2];
-=======
   <div className="flex flex-row items-center text-center h-full overflow-hidden gap-2">
     <img src="pic1.jpeg" alt="" className="object-contain w-1/2 h-fit" />
     <div className="w-1/2 text-[10px] leading-4 text-end font-meow">
@@ -103,32 +83,12 @@ const letterComponents = [
   LetterSection5,
   LetterSection6,
 ];
->>>>>>> Stashed changes
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [hearts, setHearts] = useState([]);
   const [currentLetter, setCurrentLetter] = useState(0);
-<<<<<<< Updated upstream
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const handleNextLetter = () => {
-    if (isAnimating) return; // Prevent multiple clicks during animation
-
-    setIsAnimating(true);
-
-    // Animate the current letter sliding up before switching to the next
-    setTimeout(() => {
-      setCurrentLetter((prev) => (prev + 1) % letterComponents.length);
-      setIsAnimating(false);
-    }, 500); // Matches animation duration
-  };
-
-  const CurrentLetterComponent = letterComponents[currentLetter];
-=======
   // const [floatingLetters, setFloatingLetters] = useState([]);
   const [isFloating, setIsFloating] = useState(false);
   const [hasOpenedEnvelope, setHasOpenedEnvelope] = useState(false);
@@ -150,7 +110,6 @@ function App() {
       }, 1000);
     }
   };
->>>>>>> Stashed changes
 
   useEffect(() => {
     if (isEnvelopeOpen || currentLetter == currentLetter + 1) {
@@ -217,8 +176,6 @@ function App() {
             </motion.div>
           ))}
 
-<<<<<<< Updated upstream
-=======
         {/* Current Letter - Moves Up AFTER the previous one floats */}
         {currentLetter < letterComponents.length && (
           <motion.div
@@ -235,7 +192,7 @@ function App() {
               opacity: 1,
             }}
             transition={{
-              duration: isFloating ? 2 : 0.8,
+              duration: isFloating ? 3 : 0.8,
               delay: 0.6,
               ease: "easeOut",
             }} // Delayed so it moves up after floating one disappears
@@ -264,53 +221,20 @@ function App() {
           </motion.div>
         )}
 
->>>>>>> Stashed changes
         {/* Envelope Triangles */}
         {/* Flipped triangle (Top Flap) */}
         <motion.div
         initial={{ rotateX: 180 }}
           animate={{ rotateX: isEnvelopeOpen ? 0 : 180 }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          onAnimationComplete={() => setIsOpen(true)}
+          onAnimationComplete={() => {
+            if (isEnvelopeOpen) setIsOpen(true)
+          }}
           className={clsx(
             "absolute w-0 h-0 border-l-[128px] border-l-transparent border-r-[128px] border-r-transparent border-b-[112px] border-b-red-500 origin-bottom top-[-112px]",
             isOpen ? "z-19 " : "z-30"
           )}
         ></motion.div>
-
-        {/* Letter Animation - Positioned above top triangle but below bottom and side triangles */}
-        <motion.div
-          animate={{ y: isOpen ? "-55%" : "0%" }}
-          transition={{ duration: 1, delay: isEnvelopeOpen ? 0.5 : 0 }}
-          className={clsx(
-            "absolute w-[240px] h-44 bg-white p-4 mx-2 rounded-xl shadow-lg z-20"
-          )}
-        >
-          <p className="text-sm text-gray-600 italic">To: Crush</p>
-          <p className="mt-2 text-lg font-serif text-gray-800">
-            Dear crush, you are so beautiful
-          </p>
-          <p className="mt-2 text-lg font-serif text-gray-800">
-            That every time I see you
-          </p>
-        </motion.div>
-
-        {/* Animated Letter */}
-        <motion.div
-          animate={{ y: isOpen2 ? "-55%" : "0%" }}
-          transition={{ duration: 1, delay: isEnvelopeOpen ? 0.5 : 0 }}
-          className={clsx(
-            "absolute w-[240px] h-44 bg-white p-4 mx-2 rounded-xl shadow-lg z-20"
-          )}
-        >
-          <p className="text-sm text-gray-600 italic">To: Crush</p>
-          <p className="mt-2 text-lg font-serif text-gray-800">
-            Dear crush, you are so beautiful
-          </p>
-          <p className="mt-2 text-lg font-serif text-gray-800">
-            That every time I see you
-          </p>
-        </motion.div>
 
         {/* Top triangle (Envelope cover) - Should be behind the letter */}
         <div
@@ -322,7 +246,7 @@ function App() {
         <div className="absolute bottom-0 w-0 h-0 border-l-[128px] border-l-transparent border-r-[128px] border-r-transparent border-b-[96px] border-b-red-400 z-40 rounded-lg"></div>
         {/* Left and right triangles - Should be above the letter */}
         <div className="absolute w-0 h-0 border-x-[128px] border-x-red-300 border-y-[96px] border-y-transparent z-35 rounded-b-lg"></div>
-        <div className="absolute flex z-50 items-center justify-center w-64 h-48 top-6">
+        <div className="absolute flex z-50 items-center justify-center w-64 h-48 top-2">
           <button
             className="p-4 bg-pink-500 text-white rounded-full shadow-xl hover:bg-pink-600 active:scale-90 transition-transform duration-200"
             onClick={() => {
@@ -333,7 +257,6 @@ function App() {
                 setIsFloating(false);
               } else {
                 setIsEnvelopeOpen(true);
-                
                 handleNextLetter();
               }
             }}
@@ -342,31 +265,6 @@ function App() {
           </button>
         </div>
       </div>
-
-<<<<<<< Updated upstream
-      <div className="mt-6 flex space-x-4">
-=======
-      
-
-      {/* Open/Close buttons */}
-      {/* <div className="mt-6 flex space-x-4">
->>>>>>> Stashed changes
-        <button
-          className="p-4 bg-pink-500 text-white rounded-full shadow-xl hover:bg-red-600"
-          onClick={() => {
-            setIsEnvelopeOpen(true);
-            handleNextLetter();
-            if (currentLetter === letterComponents.length - 1) {
-              setIsOpen(false);
-              setIsEnvelopeOpen(false);
-              setCurrentLetter(0);
-              setIsFloating(false);
-            }
-          }}
-        >
-          <FaHeart className="text-3xl" />
-        </button>
-      </div> */}
     </div>
   );
 }
