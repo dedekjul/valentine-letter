@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/valentine-letter/",
   theme: {
     extend: {
       fontFamily: {
@@ -16,5 +17,4 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: "/valentine-web/",
 });
